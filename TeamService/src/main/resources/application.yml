@@ -1,0 +1,18 @@
+server:
+  port: 8081
+ 
+eureka:         
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: TeamService
+     
+logging:
+  level:
+    com.self.sprintboot.learning.employee: DEBUG

@@ -12,7 +12,11 @@ eureka:
 spring:
   application:
     name: TeamService
-     
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 logging:
   level:
     com.self.sprintboot.learning.employee: DEBUG
+

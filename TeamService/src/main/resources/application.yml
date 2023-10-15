@@ -1,13 +1,15 @@
 server:
   port: 8081
- 
-eureka:         
+
+eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
     leaseExpirationDurationInSeconds: 2
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
 
 spring:
   application:
@@ -20,3 +22,11 @@ logging:
   level:
     com.self.sprintboot.learning.employee: DEBUG
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true

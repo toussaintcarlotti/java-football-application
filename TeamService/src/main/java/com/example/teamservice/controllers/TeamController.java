@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 @RestController
 public class TeamController {
-
     private static ArrayList<Team> teams = new ArrayList<Team>() {{
         add(new Team(1, "Team 1"));
         add(new Team(2, "Team 2"));

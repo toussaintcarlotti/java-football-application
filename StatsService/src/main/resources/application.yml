@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8085
 
 eureka:
   instance:
@@ -10,14 +10,16 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
 
 spring:
   application:
-    name: MatchService
+    name: StatsService
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-     
+
 logging:
   level:
     com.self.sprintboot.learning.employee: DEBUG

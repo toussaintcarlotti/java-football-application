@@ -14,6 +14,7 @@ public class TeamController {
 
     @GetMapping("/teams")
     public ArrayList<Team> getTeames() {
+        System.out.println("teams: " );
         return teams;
     }
 
@@ -39,4 +40,10 @@ public class TeamController {
         teams.removeIf(team -> team.getId() == id);
         return "Team deleted";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "working....";
+    }
+
 }

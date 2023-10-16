@@ -1,11 +1,20 @@
 package com.example.teamservice.controllers;
 
 import com.example.teamservice.models.Team;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
+
 
 @RestController
 public class TeamController {
+    @Autowired
+    private RestTemplate template;
+
     private static ArrayList<Team> teams = new ArrayList<Team>() {{
         add(new Team(1, "Team 1"));
         add(new Team(2, "Team 2"));
@@ -13,9 +22,16 @@ public class TeamController {
     }};
 
     @GetMapping("/teams")
-    public ArrayList<Team> getTeames() {
-        System.out.println("teams: " );
+    @HystrixCommand(fallbackMethod = "fallback_getTeams", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
+    })
+    public ArrayList<Team> getTeams() throws InterruptedException {
         return teams;
+    }
+
+    public ArrayList<Team> fallback_getTeams() {
+        System.out.println("Fallback method called");
+        return new ArrayList<Team>();
     }
 
     @GetMapping("/teams/{id}")
